@@ -47,12 +47,19 @@ namespace ZyPlatformSDKSystem.Runtime.AD
             }
 
             m_ActiveRequest = request;
+
+            if (!m_Ad.IsLoaded())
+            {
+                m_Ad.Load();
+            }
+
             InvokeLoaded(request);
             m_Ad.Show();
         }
 
         protected override void DestroyAd()
         {
+            UnsubscribeAdEvents();
             m_Ad?.Destroy();
             m_Ad = null;
             m_ActiveRequest = null;
@@ -61,10 +68,61 @@ namespace ZyPlatformSDKSystem.Runtime.AD
         private void CreateAdInstance()
         {
             DestroyAd();
-            m_Ad = TT.CreateInterstitialAd(m_AdUnitId, OnNativeClose, OnNativeError);
+
+            var param = new CreateInterstitialAdParam
+            {
+                InterstitialAdId = m_AdUnitId
+            };
+            m_Ad = TT.CreateInterstitialAd(param);
+            SubscribeAdEvents();
+            m_Ad.Load();
         }
 
-        private void OnNativeClose()
+        private void SubscribeAdEvents()
+        {
+            if (m_Ad == null)
+            {
+                return;
+            }
+
+            m_Ad.OnLoad += OnAdLoad;
+            m_Ad.OnError += OnAdError;
+            m_Ad.OnClose += OnAdClose;
+        }
+
+        private void UnsubscribeAdEvents()
+        {
+            if (m_Ad == null)
+            {
+                return;
+            }
+
+            m_Ad.OnLoad -= OnAdLoad;
+            m_Ad.OnError -= OnAdError;
+            m_Ad.OnClose -= OnAdClose;
+        }
+
+        private void OnAdLoad()
+        {
+            Debug.Log("[TTInterstitial] Load");
+        }
+
+        private void OnAdError(int errCode, string errMsg)
+        {
+            Debug.LogError($"[TTInterstitial] Error {errCode}: {errMsg}");
+
+            var request = m_ActiveRequest;
+            m_ActiveRequest = null;
+
+            if (request == null)
+            {
+                return;
+            }
+
+            FinishWithError(request, errCode, errMsg);
+        }
+
+        private void OnAdClose()
         {
             Debug.Log("[TTInterstitial] Close");
             DouYinInterstitialAdPolicy.RecordInterstitialShown();
@@ -78,21 +136,6 @@ namespace ZyPlatformSDKSystem.Runtime.AD
             }
 
             InvokeComplete(request, true);
-        }
-
-        private void OnNativeError(int errCode, string errMsg)
-        {
-            Debug.LogError($"[TTInterstitial] Error {errCode}: {errMsg}");
-
-            var request = m_ActiveRequest;
-            m_ActiveRequest = null;
-
-            if (request == null)
-            {
-                return;
-            }
-
-            FinishWithError(request, errCode, errMsg);
         }
     }
 }
