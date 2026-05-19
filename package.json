@@ -1,0 +1,13 @@
+{
+  "name": "com.dories.platformsdk",
+  "displayName": "Dories Platform SDK",
+  "version": "1.0.0",
+  "unity": "2022.3",
+  "description": "Cross-platform mini-game SDK abstractions (rewarded video, interstitial ads). Includes Douyin (TikTok) and editor mock implementations.",
+  "author": {
+    "name": "Dories"
+  },
+  "dependencies": {
+    "com.dories.componentization": "1.0.0"
+  }
+}

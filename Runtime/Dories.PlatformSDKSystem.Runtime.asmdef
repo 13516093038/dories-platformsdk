@@ -1,0 +1,16 @@
+{
+    "name": "Dories.PlatformSDKSystem.Runtime",
+    "rootNamespace": "ZyPlatformSDKSystem.Runtime",
+    "references": [
+        "Dories.Componentization.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
