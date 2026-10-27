@@ -24,7 +24,7 @@ namespace ZyPlatformSDKSystem.Runtime.AD
 
             if (!IsInitialized)
             {
-                Debug.LogError("[TTInterstitial] 初始化失败：广告位 ID 为空");
+                Log.Error("TTInterstitial", "初始化失败：广告位 ID 为空");
                 return;
             }
 
@@ -104,12 +104,12 @@ namespace ZyPlatformSDKSystem.Runtime.AD
 
         private void OnAdLoad()
         {
-            Debug.Log("[TTInterstitial] Load");
+            Log.Info("TTInterstitial", "Load");
         }
 
         private void OnAdError(int errCode, string errMsg)
         {
-            Debug.LogError($"[TTInterstitial] Error {errCode}: {errMsg}");
+            Log.Error("TTInterstitial", $"Error {errCode}: {errMsg}");
 
             var request = m_ActiveRequest;
             m_ActiveRequest = null;
@@ -124,7 +124,7 @@ namespace ZyPlatformSDKSystem.Runtime.AD
 
         private void OnAdClose()
         {
-            Debug.Log("[TTInterstitial] Close");
+            Log.Info("TTInterstitial", "Close");
             DouYinInterstitialAdPolicy.RecordInterstitialShown();
 
             var request = m_ActiveRequest;

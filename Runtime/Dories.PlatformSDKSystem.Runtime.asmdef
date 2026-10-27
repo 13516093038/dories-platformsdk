@@ -2,7 +2,8 @@
     "name": "Dories.PlatformSDKSystem.Runtime",
     "rootNamespace": "ZyPlatformSDKSystem.Runtime",
     "references": [
-        "Dories.Componentization.Runtime"
+        "Dories.Componentization.Runtime",
+        "Dories.Logging.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

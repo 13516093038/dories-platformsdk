@@ -22,7 +22,7 @@ namespace ZyPlatformSDKSystem.Runtime.AD
 
             if (!IsInitialized)
             {
-                Debug.LogError("[TTRewardAD] 初始化失败：广告位 ID 为空");
+                Log.Error("TTRewardAD", "初始化失败：广告位 ID 为空");
                 return;
             }
 
@@ -57,7 +57,7 @@ namespace ZyPlatformSDKSystem.Runtime.AD
 
         private void OnNativeClose(bool isEnded, int closeCode)
         {
-            Debug.Log($"[TTRewardAD] Close isEnded={isEnded}, closeCode={closeCode}");
+            Log.Info("TTRewardAD", $"Close isEnded={isEnded}, closeCode={closeCode}");
 
             if (isEnded)
             {
@@ -77,7 +77,7 @@ namespace ZyPlatformSDKSystem.Runtime.AD
 
         private void OnNativeError(int errCode, string errMsg)
         {
-            Debug.LogError($"[TTRewardAD] Error {errCode}: {errMsg}");
+            Log.Error("TTRewardAD", $"Error {errCode}: {errMsg}");
 
             var request = m_ActiveRequest;
             m_ActiveRequest = null;

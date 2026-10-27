@@ -8,6 +8,7 @@
     "name": "Dories"
   },
   "dependencies": {
-    "com.dories.componentization": "1.0.0"
+    "com.dories.componentization": "1.0.0",
+    "com.dories.logging": "1.0.0"
   }
 }

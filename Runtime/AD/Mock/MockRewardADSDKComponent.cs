@@ -1,4 +1,5 @@
 using UnityEngine;
+using Dories.Logging;
 
 namespace ZyPlatformSDKSystem.Runtime.AD
 {
@@ -17,7 +18,7 @@ namespace ZyPlatformSDKSystem.Runtime.AD
 
         protected override void OnPlay(RewardAdPlayBuilder request)
         {
-            Debug.Log($"[MockRewardAD] Play simulateComplete={m_SimulateWatchComplete}");
+            Log.Info("MockRewardAD", $"Play simulateComplete={m_SimulateWatchComplete}");
             InvokeLoaded(request);
             InvokeComplete(request, m_SimulateWatchComplete);
         }

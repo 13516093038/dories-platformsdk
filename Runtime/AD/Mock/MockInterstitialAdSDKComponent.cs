@@ -1,4 +1,5 @@
 using UnityEngine;
+using Dories.Logging;
 
 namespace ZyPlatformSDKSystem.Runtime.AD
 {
@@ -9,7 +10,7 @@ namespace ZyPlatformSDKSystem.Runtime.AD
     {
         protected override void OnPlay(InterstitialAdPlayBuilder request)
         {
-            Debug.Log("[MockInterstitial] Show");
+            Log.Info("MockInterstitial", "Show");
             InvokeLoaded(request);
             InvokeComplete(request, true);
         }
